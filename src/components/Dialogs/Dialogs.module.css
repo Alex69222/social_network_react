@@ -1,0 +1,49 @@
+.dialogs{
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+.dialogItems{
+    padding: 10px;
+}
+
+.messages{
+    padding: 10px;
+    max-width: 700px;
+}
+.message{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.message img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    
+}
+
+
+.active{
+    color: brown;
+}
+.myMessage{
+    color: white;
+    display: flex;
+    width: max-content;
+    margin-left: auto;
+}
+
+.myMessage img{
+    margin-left: 10px;
+}
+.inncomeMessage img{
+    margin-right: 10px;
+}
+.newMessageArea{
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+.newMessageArea button{
+    margin-left: 15px;
+}
