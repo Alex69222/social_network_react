@@ -1,5 +1,5 @@
 
-import state, { addPost, subscribe, updateNewPostText } from './redux/state';
+import store from './redux/state';
 
 
 
@@ -18,8 +18,8 @@ let rerenderEntireTree = (state) => {
             <BrowserRouter>
                 <App
                     state={state}
-                    addPost={addPost}
-                    updateNewPostText={updateNewPostText}
+                    addPost={store.addPost.bind(store)}
+                    updateNewPostText={store.updateNewPostText.bind(store)}
                 />
             </BrowserRouter>
         </React.StrictMode>,
@@ -27,5 +27,5 @@ let rerenderEntireTree = (state) => {
     );
 }
 
-rerenderEntireTree(state);
-subscribe(rerenderEntireTree);
+rerenderEntireTree(store.getState());
+store.subscribe(rerenderEntireTree);
