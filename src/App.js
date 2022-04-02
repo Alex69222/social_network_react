@@ -21,16 +21,16 @@ const App = (props) => {
               <Profile
                 profilePage={props.state.profilePage}
                 myAvatar={props.state.myAvatar}
-                addPost={props.addPost}
-                updateNewPostText={props.updateNewPostText}
+                dispatch={props.dispatch}
               />
             } />
 
           <Route path='/dialogs/*'
             element={
               <Dialogs
-                state={props.state.dialogsPage}
+                dialogsPage={props.state.dialogsPage}
                 myAvatar={props.state.myAvatar}
+                dispatch={props.dispatch}
               />
             } />
 
@@ -46,4 +46,4 @@ const App = (props) => {
 export default App;
 
 
-// 38
+// 40
