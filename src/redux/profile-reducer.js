@@ -2,6 +2,7 @@ const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
 let initialState = {
+    myAvatar: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/grogu-baby-yoda-the-child-1606497947.png?crop=0.679xw:0.809xh;0.218xw,0.164xh&resize=1200:*',
     newPostText: 'it-kamasutra',
     posts: [
         { id: 1, message: "Hi! How are you?", likesCount: 5, },
@@ -12,21 +13,22 @@ let initialState = {
     ],
 };
 const profileReducer = (state = initialState, action) => {
+
+
     switch (action.type) {
-        case ADD_POST:
-            let newPost = {
-                id: 5,
-                message: state.newPostText,
-                likesCount: 0,
+        case ADD_POST: {
+            return {
+                ...state,
+                newPostText: '',
+                posts: [...state.posts, { id: 5, message: state.newPostText, likesCount: 0, }],
             };
-            state.posts.push(newPost);
-            state.newPostText = '';
-            return state;
-
-        case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            return state;
-
+        }
+        case UPDATE_NEW_POST_TEXT: {
+            return {
+                ...state,
+                newPostText: action.newText,
+            };
+        }
         default:
             return state;
     }
@@ -34,6 +36,6 @@ const profileReducer = (state = initialState, action) => {
 };
 
 export const addPostActionCreator = () => ({ type: ADD_POST });
-export const updateNewPostTextActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
+export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
 
 export default profileReducer;
