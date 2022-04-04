@@ -8,6 +8,8 @@ import NavbarContainer from './components/Navbar/NavbarContainer';
 import News from './components/News/News';
 import Profile from './components/Profile/Profile';
 import Settings from './components/Settings/Settings';
+import Users from './components/Users/Users';
+import UsersContainer from './components/Users/UsersContainer';
 
 const App = (props) => {
   return (
@@ -20,6 +22,7 @@ const App = (props) => {
           <Route path='/dialogs/*' element={ <DialogsContainer/> } />
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
+          <Route path='/users' element={<UsersContainer/>} />
           <Route path='/settings' element={<Settings />} />
         </Routes>
       </div>
@@ -30,4 +33,4 @@ const App = (props) => {
 export default App;
 
 
-// 49
+// 51
