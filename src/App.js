@@ -8,7 +8,6 @@ import NavbarContainer from './components/Navbar/NavbarContainer';
 import News from './components/News/News';
 import Profile from './components/Profile/Profile';
 import Settings from './components/Settings/Settings';
-import Users from './components/Users/Users';
 import UsersContainer from './components/Users/UsersContainer';
 
 const App = (props) => {
@@ -33,4 +32,4 @@ const App = (props) => {
 export default App;
 
 
-// 55
+// 57

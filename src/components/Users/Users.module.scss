@@ -1,3 +1,10 @@
 .userPhoto{
     max-height: 150px;
 }
+.page{
+    padding: 5px;
+    cursor: pointer;
+    .selectedPage{
+        font-weight: bold;
+    }
+}
