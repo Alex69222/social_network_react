@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
@@ -6,7 +5,7 @@ import Header from './components/Header/Header';
 import Music from './components/Music/Music';
 import NavbarContainer from './components/Navbar/NavbarContainer';
 import News from './components/News/News';
-import Profile from './components/Profile/Profile';
+import ProfileContainer from './components/Profile/ProfileContainer';
 import Settings from './components/Settings/Settings';
 import UsersContainer from './components/Users/UsersContainer';
 
@@ -14,14 +13,16 @@ const App = (props) => {
   return (
     <div className='app-wrapper'>
       <Header />
-      <NavbarContainer/>
+      <NavbarContainer />
       <div className='app-wrapper-content'>
         <Routes>
-          <Route path='/profile' element={<Profile/>}/>
-          <Route path='/dialogs/*' element={ <DialogsContainer/> } />
+          <Route path="/profile" element={<ProfileContainer />}>
+            <Route path=":userId" element={<ProfileContainer />} />
+          </Route>
+          <Route path='/dialogs/*' element={<DialogsContainer />} />
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
-          <Route path='/users' element={<UsersContainer/>} />
+          <Route path='/users' element={<UsersContainer />} />
           <Route path='/settings' element={<Settings />} />
         </Routes>
       </div>
@@ -32,4 +33,4 @@ const App = (props) => {
 export default App;
 
 
-// 59
+// 61 / Прокинуть всю инфу профиля

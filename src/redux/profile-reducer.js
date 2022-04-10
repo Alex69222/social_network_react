@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 let initialState = {
     myAvatar: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/grogu-baby-yoda-the-child-1606497947.png?crop=0.679xw:0.809xh;0.218xw,0.164xh&resize=1200:*',
@@ -11,6 +12,8 @@ let initialState = {
         { id: 4, message: "Ok. Maby later", likesCount: 1, },
 
     ],
+    profile: null,
+    userId: null
 };
 const profileReducer = (state = initialState, action) => {
 
@@ -29,6 +32,12 @@ const profileReducer = (state = initialState, action) => {
                 newPostText: action.newText,
             };
         }
+        case SET_USER_PROFILE: {
+            return {
+                ...state,
+                profile: action.profile,
+            };
+        }
         default:
             return state;
     }
@@ -36,6 +45,7 @@ const profileReducer = (state = initialState, action) => {
 };
 
 export const addPostActionCreator = () => ({ type: ADD_POST });
+export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const updateNewPostTextActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
 
 export default profileReducer;
