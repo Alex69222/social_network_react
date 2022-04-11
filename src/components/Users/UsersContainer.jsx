@@ -14,7 +14,9 @@ class UsersContainer extends React.Component {
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.toggleIsFetching(true);
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{
+                withCredentials: true
+            })
                 .then(response => {
                     this.props.toggleIsFetching(false);
                     this.props.setUsers(response.data.items);
@@ -25,7 +27,9 @@ class UsersContainer extends React.Component {
     onPageChanged = (page) => {
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(page);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`,{
+            withCredentials: true
+        })
             .then(response => {
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(response.data.items);
@@ -58,32 +62,6 @@ let mapStateToProps = (state) => {
         isFetching: state.usersPage.isFetching,
     };
 };
-
-// let mapDispatchToProps = (dispatch) => {
-//     return {
-//         follow: (userID) => {
-//             dispatch(followAC(userID));
-//         },
-//         unfollow: (userID) => {
-//             dispatch(unfollowAC(userID));
-//         },
-//         setUsers: (users) => {
-//             dispatch(setUsersAC(users));
-//         },
-//         setCurrentPage: (currentPage) => {
-//             dispatch(setCurrentPageAC(currentPage));
-//         },
-//         setTotalUsersCount: (totalUsersCount) => {
-//             dispatch(setTotalUsersCountAC(totalUsersCount));
-//         },
-//         toggleIsFetching: (isFetching) =>{
-//             dispatch(toggleIsFetchingAC(isFetching));
-//         }
-
-
-//     };
-// };
-
 
 export default connect(mapStateToProps, 
     {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, })(UsersContainer);
