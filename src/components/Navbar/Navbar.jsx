@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import s from './Navbar.module.css';
 const setActiveLink =  ({isActive}) => isActive ? s.active : '';
 const Navbar = (props) => {
-    let friends = props.state.friends.map(el => <div key={el.id} className={s.friend}><img src={el.avatar} /><p>{el.name}</p></div>);
+    let friends = props.state.friends.map(el => <div key={el.id} className={s.friend}><img src={el.avatar} alt="avatar" /><p>{el.name}</p></div>);
     return (
         <nav className={s.nav}>
             <div className={`${s.item}`}>
