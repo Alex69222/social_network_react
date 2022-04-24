@@ -37,7 +37,7 @@ let mapStateToProps = state => ({
     status: state.profilePage.status,
     myAvatar: state.profilePage.myAvatar,
     userId: state.profilePage.userId,
-    // isAuth: state.auth.isAuth,
+    isAuth: state.auth.isAuth,
 });
 
 
@@ -46,5 +46,5 @@ let mapStateToProps = state => ({
 export default compose(
     connect(mapStateToProps, { getUserProfile, getStatus, updateStatus}),
     withRouter,
-    // withAuthRedirect,
+    withAuthRedirect,
 )(ProfileContainer);
