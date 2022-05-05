@@ -49,4 +49,4 @@ const mapStateToProps = state =>({
 });
 export default  connect(mapStateToProps, {initializeApp})(App);
 
-// 91 / Прокинуть всю инфу профиля
+// 92 / Прокинуть всю инфу профиля
