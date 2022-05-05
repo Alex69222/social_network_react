@@ -6,21 +6,21 @@ import { login } from "../../redux/auth-reducer";
 import { required } from "../../utils/validators/validators";
 import { Input } from "../common/FormControls/FormControl";
 import styles from '../common/FormControls/FormControl.module.scss';
-const LoginForm = props => {
+import {createField} from "../common/FormControls/FormControl"
+const LoginForm = ({handleSubmit, error  }) => {
     
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field component={Input} name='email' placeholder="Email" validate={[required]} />
-            </div>
-            <div>
-                <Field component={Input} name='password' placeholder="Password" type={"password"} validate={[required]}/>
-            </div>
-            <div>
+        <form onSubmit={handleSubmit}>
+            {createField("Email", "email", [required], Input, {type: "password"})}
+                {/* <Field component={Input} name='email' placeholder="Email" validate={[required]} /> */}
+            {createField("Password", "password", [required], Input)}
+                {/* <Field component={Input} name='password' placeholder="Password" type={"password"} validate={[required]}/> */}
+                {createField(null, "rememberMe", null, Input, {type: "checkbox"}, "remember me")}
+           {/* <div>
                 <Field component={Input} name='rememberMe' type="checkbox" /> remember me
-            </div>
-            {props.error && <div className={styles.formSummaryError}>
-                {props.error}
+            </div> */}
+            {error && <div className={styles.formSummaryError}>
+                {error}
             </div>}
             <div>
                 <button>Login</button>
