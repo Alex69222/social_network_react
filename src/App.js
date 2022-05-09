@@ -1,9 +1,12 @@
-import React from 'react';
+
+import React, { Suspense } from 'react';
 import { connect } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Preloader from './components/common/Preloader/Preloader';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
+// import DialogsContainer from './components/Dialogs/DialogsContainer';
+
+
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import Music from './components/Music/Music';
@@ -16,6 +19,10 @@ import { initializeApp } from './redux/app-reducer';
 import store from './redux/redux-store';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { WithSuspense } from './hoc/withSuspense';
+
+
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
 class App extends React.Component {
   componentDidMount = () => {
@@ -34,7 +41,12 @@ class App extends React.Component {
             <Route path="/profile" element={<ProfileContainer />}>
               <Route path=":userId" element={<ProfileContainer />} />
             </Route>
-            <Route path='/dialogs/*' element={<DialogsContainer />} />
+            <Route path='/dialogs/*' element={
+              <Suspense fallback={<Preloader />}>
+                <DialogsContainer />
+              </Suspense>
+            
+            } />
             <Route path='/news' element={<News />} />
             <Route path='/music' element={<Music />} />
             <Route path='/users' element={<UsersContainer />} />
@@ -57,7 +69,7 @@ let SamuraiJSApp = (props) => {
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <AppContainer/>
+        <AppContainer />
       </Provider>
     </BrowserRouter>
   )
@@ -65,4 +77,4 @@ let SamuraiJSApp = (props) => {
 export default SamuraiJSApp;
 
 
-// 94 / Прокинуть всю инфу профиля
+// 95 / Прокинуть всю инфу профиля
