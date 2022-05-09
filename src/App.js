@@ -13,13 +13,16 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import Settings from './components/Settings/Settings';
 import UsersContainer from './components/Users/UsersContainer';
 import { initializeApp } from './redux/app-reducer';
+import store from './redux/redux-store';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 class App extends React.Component {
   componentDidMount = () => {
     this.props.initializeApp();
   }
   render() {
-    if(!this.props.initialized){ 
+    if (!this.props.initialized) {
       return <Preloader />
     }
     return (
@@ -44,9 +47,22 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = state =>({
+const mapStateToProps = state => ({
   initialized: state.app.initialized
 });
-export default  connect(mapStateToProps, {initializeApp})(App);
 
-// 92 / Прокинуть всю инфу профиля
+let AppContainer = connect(mapStateToProps, { initializeApp })(App);
+
+let SamuraiJSApp = (props) => {
+  return (
+    <BrowserRouter>
+      <Provider store={store}>
+        <AppContainer/>
+      </Provider>
+    </BrowserRouter>
+  )
+}
+export default SamuraiJSApp;
+
+
+// 94 / Прокинуть всю инфу профиля
