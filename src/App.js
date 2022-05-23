@@ -77,4 +77,4 @@ let SamuraiJSApp = (props) => {
 export default SamuraiJSApp;
 
 
-// 95 / Прокинуть всю инфу профиля
+// 97 / Прокинуть всю инфу профиля

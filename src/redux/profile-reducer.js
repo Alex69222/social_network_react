@@ -1,9 +1,11 @@
+import { stopSubmit } from "redux-form";
 import { profileAPI, usersAPI } from "../api/api";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_SET_STATUS';
 const DELETE_POST = 'DELETE_POST';
+const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 let initialState = {
     myAvatar: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/grogu-baby-yoda-the-child-1606497947.png?crop=0.679xw:0.809xh;0.218xw,0.164xh&resize=1200:*',
     newPostText: 'it-kamasutra',
@@ -47,6 +49,12 @@ const profileReducer = (state = initialState, action) => {
                 status: action.status,
             };
         }
+        case SAVE_PHOTO_SUCCESS: {
+            return {
+                ...state,
+                profile: { ...state.profile, photos: action.photos }
+            };
+        }
         default:
             return state;
     }
@@ -57,6 +65,7 @@ export const addPostActionCreator = (newPostText) => ({ type: ADD_POST, newPostT
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
 export const deletePost = (postId) => ({ type: DELETE_POST, postId });
+export const savePhotoSuccess = (photos) => ({ type: SAVE_PHOTO_SUCCESS, photos });
 
 
 export const getUserProfile = (userId) => {
@@ -77,6 +86,25 @@ export const updateStatus = (status) => {
         if (res.data.resultCode === 0) {
             dispatch(setStatus(status))
         }
+    }
+}
+export const savePhoto = (file) => {
+    return async (dispatch) => {
+        let res = await profileAPI.savePhoto(file)
+        if (res.resultCode === 0) {
+            dispatch(savePhotoSuccess(res.data.photos))
+        }
+    }
+}
+export const saveProfile = (profile) => async (dispatch, getState) => {
+    const userId = getState().auth.userId
+    let res = await profileAPI.saveProfile(profile)
+    if (res.data.resultCode === 0) {
+        dispatch(getUserProfile(userId))
+    } else {
+        let message = res.data.messages.length > 0 ? res.data.messages[0] : "Some error";
+        dispatch(stopSubmit('editProfile', { _error: message }))
+        return Promise.reject(message)
     }
 }
 
